@@ -1,0 +1,33 @@
+{% load static %}
+{% load menus_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+</head>
+<body>
+    <a href="{% url 'menu:home' %}">Home</a>
+    <p>{{ subcategory }}</p>
+
+    {% for menus_tags in other_menus %}
+      {% draw_menu menus_tags as menu %}
+      <ul class="menu">
+          <a href="{{ menus_tags.get_absolute_url }}">
+            <h2>{{ menus_tags }}</h2>
+          </a>
+          {% if menu|length > 0 %}
+            {% for item in menu %}
+              <li {% if request.resolver_match.url_name == item.named_url %} class="active"{% endif %}>
+                <a href="{{ item.get_absolute_url }}">{{ item.title }}</a>
+              </li>
+            {% endfor %}
+          {% else %}
+            <li>No menu items found.</li>
+          {% endif %}
+        </ul>
+  {% endfor %}
+</body>
+</html>

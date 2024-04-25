@@ -1,0 +1,15 @@
+.menu {
+    list-style-type: none;
+    padding: 0;
+}
+
+.menu a {
+    display: block;
+    padding: 5px;
+    text-decoration: none;
+}
+
+.menu li.active > a,
+.menu li:hover > a {
+    background-color: #ddd;
+}
